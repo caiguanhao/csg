@@ -111,6 +111,7 @@ func (a account) ToAccount() Account {
 	}
 }
 
+// Get all associated accounts.
 func (client Client) GetAccounts(ctx context.Context) ([]Account, error) {
 	var response struct {
 		response
@@ -130,6 +131,7 @@ func (client Client) GetAccounts(ctx context.Context) ([]Account, error) {
 
 }
 
+// Get all associated accounts with metering point id.
 func (client Client) GetAccountsWithMeteringPointId(ctx context.Context, account Account) ([]AccountWithMeteringPointId, error) {
 	reqBody, err := jsonRequestBody(map[string]interface{}{
 		"areaCode": account.AreaCode,
@@ -199,6 +201,7 @@ func (b bill) ToBill() Bill {
 	}
 }
 
+// Get bills in year of specific account.
 func (client Client) GetBills(ctx context.Context, account Account, year int) ([]Bill, error) {
 	reqBody, err := jsonRequestBody(map[string]interface{}{
 		"areaCode":            account.AreaCode,
@@ -246,6 +249,7 @@ func (d dailyUsage) ToDailyUsage() DailyUsage {
 	}
 }
 
+// Get daily electricity usage in month of specific account.
 func (client Client) GetDailyUsages(ctx context.Context, account AccountWithMeteringPointId, year, month int) ([]DailyUsage, error) {
 	reqBody, err := jsonRequestBody(map[string]interface{}{
 		"areaCode":        account.AreaCode,
